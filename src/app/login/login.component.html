@@ -1,0 +1,53 @@
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card mb-3 mx-auto mt-5 shadow-lg p-3 mb-5 bg-white rounded row border-light margin" style="max-width: 70%;">
+            <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{errorMsg}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://images.unsplash.com/photo-1665557855970-b83bb0612e4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                        class="img-fluid rounded-start" alt="...">
+                        
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Login Form</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Please Enter Your Data to Login</h6>
+                        <form action="" [formGroup]="loginForm">
+                            <div class="row">
+    
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email:</label>
+                                        <input type="email" class="form-control" id="user-email" placeholder="Enter Email"
+                                            formControlName="email">
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-sm-6">
+                                    <label for="pwd" class="form-label">Password:</label>
+                                    <input type="password" class="form-control" id="pwd" placeholder="Enter Password"
+                                        formControlName="password">
+                                </div>
+                            </div>
+    
+    
+                            <div class="col-sm-3 my-3">
+                                <button type="submit" (click)="login()" class="btn btn-primary">Login</button> &nbsp;
+                            </div>
+                            <div class="col-sm-3 my-3">
+                              
+                                <button type="submit" (click)="redirectRegister()" class="btn btn-dark">Register</button>
+                            </div>
+    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  
+</div>

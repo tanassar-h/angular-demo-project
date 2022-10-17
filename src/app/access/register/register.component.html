@@ -1,0 +1,68 @@
+<div class="container">
+    <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{errorMsg}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{success}}</strong>
+    </div>
+    <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded border-light mt-5 margin">
+        <div class="card-body">
+            <h5 class="card-title">Signup Form</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Please fill all the fields</h6>
+            <form action="" [formGroup]="registerForm">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3 mt-3">
+                            <label for="text" class="form-label">First Name:</label>
+                            <input  type="text"  class="form-control" id="first-name" placeholder="Enter First Name"
+                               formControlName ="firstname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="user-email" placeholder="Enter Email" formControlName="email">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3 mt-3">
+                            <label for="text" class="form-label">Last Name:</label>
+                            <input type="text" class="form-control" id="last-name" placeholder="Enter Last Name"
+                                formControlName="lastname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Phone Number:</label>
+                            <input type="text" class="form-control" id="user-phone" placeholder="Enter Phone Number"
+                                formControlName="phone">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Address:</label>
+                            <input type="text" class="form-control" id="user-address" placeholder="Enter Address"
+                                formControlName="address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="pwd" class="form-label">Password:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter Password"
+                                formControlName="password">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="pwd" class="form-label">Confirm Password:</label>
+                            <input type="password" class="form-control" id="confirmpwd" placeholder="Enter Confirm Password"
+                                formControlName="confirmpassword">
+                        </div>
+
+                    </div>
+                    
+                    <div class="col-sm-6 my-3">
+                        <button type="submit" [disabled]="!registerForm.valid" (click)="postData()" class="btn btn-primary">Submit</button> &nbsp;
+                        <button type="submit" (click)="resetData()"class="btn btn-outline-secondary">Reset</button>&nbsp;
+                        <button type="submit" (click)="close()"class="btn btn-outline-danger">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

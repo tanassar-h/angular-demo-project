@@ -1,0 +1,85 @@
+{
+  "admin": [
+    {
+      "id": 1,
+      "firstname": "abc",
+      "email": "wqeeqw@hm.com",
+      "lastname": "wwadfw",
+      "phone": "asfasfafass",
+      "address": "1234567",
+      "password": "11223344"
+    },
+    {
+      "firstname": "12wq",
+      "email": "wqeeqw@hm.com",
+      "lastname": "wwadfw",
+      "phone": "ewewewew",
+      "address": "1234567",
+      "id": 2
+    },
+    {
+      "name": "12wq",
+      "email": "wqeeqw@hm.com",
+      "phone": "213133131131331",
+      "address": "sadsddA",
+      "password": "1234567",
+      "id": 3
+    },
+    {
+      "name": "tanassarhussain",
+      "email": "wqeeqw@hm.com",
+      "phone": "213133131131331",
+      "address": "1234567",
+      "password": "1234567",
+      "id": 4
+    },
+    {
+      "name": "nasir",
+      "email": "www@gmail.com",
+      "phone": "33333",
+      "address": "444",
+      "password": "1234567",
+      "id": 5
+    },
+    {
+      "name": "weewwewew",
+      "email": "rrr@gmail.com",
+      "phone": "4242424242",
+      "address": "313131",
+      "password": "12345678",
+      "id": 6
+    }
+  ],
+  "login": [
+    {
+      "email": "tanassar@gmail.com",
+      "password": "12345678",
+      "id": 5
+    },
+    {
+      "email": "www@gmail.com",
+      "password": "1234567",
+      "id": 6
+    }
+  ],
+  "profile": [
+    {
+      "firstname": "tanassarhussain ",
+      "email": "wqeeqw@hm.com",
+      "lastname": "eww",
+      "phone": "asfasfafass",
+      "address": "ok ok",
+      "id": "UknK1RI"
+    }
+  ],
+  "posts": [
+    {
+      "activitydiscription": "xxxx",
+      "activitytime": "15:40",
+      "activitypriority": "moderate",
+      "assignbyemail": "dddq@gn",
+      "assigntoemail": "dddq@gn",
+      "id": 1
+    }
+  ]
+}
