@@ -2,7 +2,6 @@ import { ActivityComponent } from './activity/activity.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddAdminComponent } from './add-admin/add-admin.component';
-import { AddcontactComponent } from './addcontact/addcontact.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
 

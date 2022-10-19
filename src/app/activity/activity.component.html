@@ -47,7 +47,9 @@
                         <h5 class="card-title">Activity Time :</h5>
                         <p class="card-text">{{act.activitytime}}</p>
                         <h5  class="card-title">Activity Priority :</h5>
-                        <p class="card-text text-danger fw-bold" [class]="success">{{act.activitypriority | uppercase}}</p>
+                        <p class="card-text text-danger fw-bold" [ngClass]="{'text-danger' : 'act.activitypriority == urgent',
+                        'text-success' : 'act.activitypriority == normal',
+                        'text-warning' : 'act.activitypriority == moderate'}">{{act.activitypriority | uppercase}}</p>
                         <h5 class="card-title">Activity Assign By :</h5>
                         <p class="card-text ">{{act.assignbyemail}}</p>
                         <h5 class="card-title">Activity Assign To :</h5>
