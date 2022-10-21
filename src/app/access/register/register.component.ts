@@ -16,13 +16,14 @@ export class RegisterComponent implements OnInit {
   constructor(private RF: FormBuilder , private route:Router , private _userService: UserService ) 
   {
     this.registerForm = this.RF.group({
-      firstname: ['',[Validators.required, Validators.minLength(3)]],
+      fisrtName: ['',[Validators.required, Validators.minLength(3)]],
       email: ['',[Validators.required, Validators.email]],
-      lastname: ['',[Validators.required, Validators.minLength(3)]],
-      phone: ['',[Validators.required, Validators.minLength(3)]],
+      lastName: ['',[Validators.required, Validators.minLength(3)]],
+      mobileNo: ['',[Validators.required, Validators.minLength(3)]],
       address: ['',[Validators.required, Validators.minLength(3)]],
       password: ['',[Validators.required, Validators.minLength(6)]],
       confirmpassword: ['',[Validators.required, Validators.minLength(6)]],
+      roles: ['']
     });
   }
 
@@ -32,11 +33,15 @@ export class RegisterComponent implements OnInit {
   respdata:any  
   postData():void 
   {
+    
 
     if ( this.registerForm.get('password')?.value ==  this.registerForm.get('confirmpassword')?.value) 
     {
-      this._userService.registration(this.registerForm.value).subscribe(item =>{
+      let regData = this.registerForm.value;
+      delete regData.confirmpassword;
+      this._userService.registration(regData).subscribe(item =>{
         this.respdata = item
+       // backend response
       })
       this.success = 'User Registered Successfully'
       setTimeout(() => {

@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
       //console.log(this.loginForm)
       this._userService.proceedLogin(this.loginForm.value).subscribe(
         (response:any) => {
+          console.log(response)
           if(response.status == 'failed')
           {
             this.errorMsg = response.message;

@@ -8,8 +8,8 @@ import { UserAuthService } from './user-auth.service';
 })
 export class UserService {
 
-  loginApi = 'http://localhost:8000/api/user/login';
-  signupApi = ''
+  loginApi = 'http://haalim-001-site1.dtempurl.com/api/Login/Login';
+  signupApi = 'http://haalim-001-site1.dtempurl.com/api/User/SignUp'
 
   requestHeader  = new HttpHeaders(
     {
@@ -20,11 +20,12 @@ export class UserService {
 
   public proceedLogin(loginData: any): Observable<any> // Jwt Token
   { 
+    console.log(loginData)
     
-    return this.http.post(`${this.loginApi}`, loginData , {headers:this.requestHeader});
+    return this.http.post(`${this.loginApi}`,loginData , {headers:this.requestHeader});
   }
 
-
+  
 
   public getProfile(): Observable<any>
   {
@@ -48,8 +49,9 @@ export class UserService {
     }
   }
   registration(data:any)
-  {
-    return this.http.post(`${this.signupApi}`, data)
+  {console.log(data)
+    return this.http.post(`${this.signupApi}`,data)
+
   }
   
 }

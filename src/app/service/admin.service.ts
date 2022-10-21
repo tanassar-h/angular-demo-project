@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AdminService {
 
-  adminDataUrl = 'http://localhost:3000/admin'
+  getallAdminurl = 'http://haalim-001-site1.dtempurl.com/api/Admin/GetAllUsers';
+  getsingleDataurl = '	http://haalim-001-site1.dtempurl.com/api/Admin/AddUser';
   adminApi = ''
   requestHeader  = new HttpHeaders(
     {
@@ -20,19 +21,19 @@ export class AdminService {
 
   getAllAdmin():Observable<any>
   {
-    return this.http.get(`${this.adminDataUrl}`)
+    return this.http.get(`${this.getallAdminurl}`)
   }
   public getProfile(): Observable<any>
   {
 
-    return this.http.get('http://localhost:8000/api/user/loggeduser' , {headers:this.requestHeader})
+    return this.http.get(this.getsingleDataurl, {headers:this.requestHeader})
   }
   createAdmin(data:any):Observable<any>
   {
-    return this.http.post(`${this.adminDataUrl}` ,data)
+    return this.http.post(`${this.getAllAdmin}` ,data)
    
   }
-  registration(data:any)
+  registration(data:any):Observable<any>
   {
     return this.http.post(`${this.adminApi}`, data)
   }
