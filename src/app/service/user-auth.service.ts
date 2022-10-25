@@ -31,7 +31,15 @@ export class UserAuthService {
   {
     localStorage.clear();
   }
-
+  
+  public setEmail(email : any)
+  {
+    return localStorage.setItem('email' , email)
+  }
+  public getEmail()
+  {
+    return localStorage.getItem('email')
+  }
   public isLoggedin()
   {
      return this.getRoles() && this.getToken();

@@ -31,18 +31,16 @@ export class RegisterComponent implements OnInit {
   {
   }
   respdata:any  
-  postData():void 
+  public postData()
   {
     
 
-    if ( this.registerForm.get('password')?.value ==  this.registerForm.get('confirmpassword')?.value) 
+    if ( this.registerForm.get('password')?.value === this.registerForm.get('confirmpassword')?.value) 
     {
       let regData = this.registerForm.value;
       delete regData.confirmpassword;
-      this._userService.registration(regData).subscribe(item =>{
-        this.respdata = item
-       // backend response
-      })
+      console.log(regData)
+      this._userService.registration(regData).subscribe()
       this.success = 'User Registered Successfully'
       setTimeout(() => {
         this.close()

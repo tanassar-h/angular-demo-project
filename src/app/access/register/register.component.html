@@ -1,13 +1,14 @@
 <div class="container">
-    <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{errorMsg}}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{success}}</strong>
-    </div>
+
     <div class="card mt-3 shadow-lg p-3 mb-5 bg-white rounded border-light mt-5 margin">
         <div class="card-body">
+            <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{errorMsg}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{success}}</strong>
+            </div>
             <h5 class="card-title">Signup Form</h5>
             <h6 class="card-subtitle mb-2 text-muted">Please fill all the fields</h6>
             <form action="" [formGroup]="registerForm">
@@ -30,8 +31,8 @@
                                 formControlName="lastName">
                         </div>
                         <div class="mb-3">
-                            <label for="text" class="form-label">Phone Number:</label>
-                            <input type="text" class="form-control" id="user-phone" placeholder="Enter Phone Number"
+                            <label for="number" class="form-label">Phone Number:</label>
+                            <input type="number" class="form-control" id="user-phone" placeholder="Enter Phone Number"
                                 formControlName="mobileNo">
                         </div>
                     </div>

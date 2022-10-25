@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserAuthService } from '../service/user-auth.service';
+import jwt_decode from 'jwt-decode';
+import { of } from 'rxjs';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -36,15 +38,16 @@ export class LoginComponent implements OnInit {
       //console.log(this.loginForm)
       this._userService.proceedLogin(this.loginForm.value).subscribe(
         (response:any) => {
-          console.log(response)
+          let tokenInfo:any = jwt_decode(response);
           if(response.status == 'failed')
           {
             this.errorMsg = response.message;
           }
-          this._userAuthService.setRoles(response.data.role)
-          this._userAuthService.setToken(response.token)
+          this._userAuthService.setRoles(tokenInfo.role)
+          this._userAuthService.setToken(response);
+          this._userAuthService.setEmail(tokenInfo.nameid)
 
-          const role = response.data.role;
+          const role = tokenInfo.role;
           if(role === 'admin')
           {
             this.router.navigate(['adminDashboard']);

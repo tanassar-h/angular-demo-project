@@ -24,23 +24,29 @@ export class UserComponent implements OnInit  {
   data: any;
   show: boolean = false;
   getData: any
+  errorMsg: any;
 
   constructor(private _serviceCrud: UserCrudService, private RF: FormBuilder, private _userService : UserService, private routes: Router, private _userAuthService : UserAuthService) {
 
-    this.registerForm = RF.group({
-      firstname: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      lastname: ['', [Validators.required, Validators.minLength(3)]],
-      phone: ['', [Validators.required, Validators.minLength(3)]],
-      address: ['', [Validators.required, Validators.minLength(3)]],
+    this.registerForm = this.RF.group({
+      fisrtName: ['',[Validators.required, Validators.minLength(3)]],
+      email: ['',[Validators.required, Validators.email]],
+      lastName: ['',[Validators.required, Validators.minLength(3)]],
+      mobileNo: ['',[Validators.required, Validators.minLength(3)]],
+      address: ['',[Validators.required, Validators.minLength(3)]],
+      password: ['',[Validators.required, Validators.minLength(6)]],
+      confirmpassword: ['',[Validators.required, Validators.minLength(6)]],
+      roles: ['']
     });
 
     this.editForm = RF.group({
-      firstname: ['', [Validators.required, Validators.minLength(3)]],
+      fisrtName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      lastname: ['', [Validators.required, Validators.minLength(3)]],
-      phone: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      mobileNo: ['', [Validators.required, Validators.minLength(3)]],
       address: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['',[Validators.required, Validators.minLength(6)]],
+      roles: ['']
     });
 
   }
@@ -62,15 +68,26 @@ export class UserComponent implements OnInit  {
     
   
   }
+  
 
 
   postData(): void {
-   // console.log(this.registerForm.value)
-    this._serviceCrud.createUser(this.registerForm.value).subscribe(item => {
-      this.respdata = item;
-      this.success = 'User Registered Successfully'
+
+    if ( this.registerForm.get('password')?.value === this.registerForm.get('confirmpassword')?.value) 
+    {
+      let regData = this.registerForm.value;
+      delete regData.confirmpassword;
+      console.log(regData)
+      this._serviceCrud.createUser(regData).subscribe()
       this.getAllData()
-    })
+      this.success = 'User Registered Successfully'
+      this.reloadCurrentRoute()
+
+    } else 
+    {
+      this.errorMsg = 'Password Not Match';
+    }
+
   
   }
 
@@ -78,46 +95,66 @@ export class UserComponent implements OnInit  {
   {
     this._serviceCrud.getAllUser().subscribe(item => {
       this.userDetail = item;
-      //console.log(this.userDetail)
+      console.log(this.userDetail)
     })
   }
 
-  deleteID(id: any) {
-    console.log(id);
-    this._serviceCrud.deleteUser(id).subscribe((res) => {
+  deleteID(email: any) {
+    this._serviceCrud.deleteUser(email).subscribe((res) => {
       this.success = res.message
-
+      this.getAllData()
+      this.reloadCurrentRoute()
 
       // instant load data
      // this.api.getAllUser().subscribe((res) => {
        // console.log('Get All User', res);
        // this.readUser = res.data;
      // })
-     this.getAllData()
-   })}
+     
+   })
+  }
 
    updateID(data:any)
    {
-    this.editForm.controls['firstname'].setValue(data.firstname);
-    this.editForm.controls['lastname'].setValue(data.lastname);
+    this.editForm.controls['fisrtName'].setValue(data.fisrtName);
+    this.editForm.controls['lastName'].setValue(data.lastName);
     this.editForm.controls['email'].setValue(data.email);
-    this.editForm.controls['phone'].setValue(data.phone);
+    this.editForm.controls['mobileNo'].setValue(data.mobileNo);
     this.editForm.controls['address'].setValue(data.address);
-    this.getparamid = (data.id)
+    this.editForm.controls['roles'].setValue(data.roles)
+    this.getparamid = (data.email)
 
    }
 
    editData()
    {
-
-    if(this.editForm.valid)
+    if (localStorage.getItem('roles') === 'user')
     {
-      //console.log(this.getparamid)
-      this._serviceCrud.updateUser(this.editForm.value , this.getparamid).subscribe()
-      this.reloadCurrentRoute()
- 
+      if(this.editForm.valid)
+      {
+        //console.log(this.getparamid)
+        this._serviceCrud.updateUser(this.editForm.value , this.getparamid).subscribe()
+        this.getAllData()
+        this.reloadCurrentRoute()
+        
+   
+      }
     }
+    else
+    {
+      if(this.editForm.valid)
+      {
+        //console.log(this.getparamid)
+        this._serviceCrud.updateuserbyAadmin(this.editForm.value , this.getparamid).subscribe()
+        this.getAllData()
+        this.reloadCurrentRoute()
+   
+      }
+    }
+
+
    }
+   
 
    reloadCurrentRoute() {
     const currentUrl = this.routes.url;
@@ -133,11 +170,12 @@ export class UserComponent implements OnInit  {
 
   getProfile()
   {
-    this._userService.getProfile().subscribe((res: { user: any; })=>
+    this._userService.getProfile().subscribe((res)=>
     {
       {
         // get Data form user
-        this.userDetail = [res.user]
+        this.userDetail = [res]
+        //console.log(res)
       }
       
     },(error)=>

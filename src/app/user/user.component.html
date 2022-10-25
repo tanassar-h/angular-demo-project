@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <div class="row justify-content-md-between d-sm-flex">
+    <div class="row justify-content-md-between flex-wrap">
         <div class="col-lg-7">
-                        <table class="table table-responsive table-striped table-hover shadow p-3 mb-5 bg-body rounded border border-light">
+                        <table class="table table-bordered table-condensed table-responsive table-striped table-hover shadow p-3 mb-5 bg-body rounded border border-light">
                             <thead>
                               <tr >
                                 <th scope="col">{{displayColumns[0]}}</th>
@@ -13,51 +13,72 @@
                                 <th scope="col">Edit</th>
                               </tr>
                             </thead>
-                            <tbody>
+
                                 <tbody>
                                     <tr *ngFor="let usr of userDetail">
-                                      <td>{{usr.firstname}}</td>
-                                      <td>{{usr.lastname}}</td>
+                                      <td>{{usr.fisrtName}}</td>
+                                      <td>{{usr.lastName}}</td>
                                       <td>{{usr.email}}</td>
-                                      <td>{{usr.phone}}</td>
+                                      <td>{{usr.mobileNo}}</td>
                                       <td>{{usr.address}}</td>
-                                      <td><button class="btn btn-outline-danger" (click)="deleteID(usr.id)" [disabled]="show">Delete</button></td>
-                                      <td><a class="btn btn-outline-success"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="updateID(usr)" >Edit</a></td>
+                                      <td><button class="btn btn-outline-danger" (click)="deleteID(usr.email)" [disabled]="show">Delete</button></td>
+                                      <td><button class="btn btn-outline-success"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="updateID(usr)">Edit</button></td>
                                     </tr>
                                   </tbody>
                           </table>
         </div>
-            <div class="col-lg-5">
+            <div class="col-lg-4">
                 <app-user-dashboard *ngIf="show"></app-user-dashboard>
                 <div class="card  shadow p-3 mb-5 bg-body rounded border border-light  justify-content-end" *ngIf="isVisible">
                     
                     <div class="card-body">
+                        <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{errorMsg}}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{success}}</strong>
+                        </div>
                         <h5 class="card-title fw-bold fs-5">Add User:</h5>
                         <form action="" [formGroup]="registerForm">
                         <div class="mb-2 mt-2">
                             <label for="text" class="form-label">First Name:</label>
-                            <input  type="text"  class="form-control" id="first-name" placeholder="Enter First Name"
-                               formControlName ="firstname">
+                            <input  type="text"  class="form-control" placeholder="Enter First Name"
+                               formControlName ="fisrtName">
                         </div>
                         <div class="mb-2 mt-2">
                             <label for="text" class="form-label">Last Name:</label>
-                            <input type="text" class="form-control" id="last-name" placeholder="Enter Last Name"
-                                formControlName="lastname">
+                            <input type="text" class="form-control"  placeholder="Enter Last Name"
+                                formControlName="lastName">
                         </div>
                         <div class="mb-2 mt-2">
                             <label for="email" class="form-label">Email:</label>
-                            <input type="email" class="form-control" id="user-email" placeholder="Enter Email" formControlName="email">
+                            <input type="email" class="form-control"  placeholder="Enter Email" formControlName="email">
                         </div>
                         <div class="mb-2 mt-2">
                             <label for="text" class="form-label">Phone Number:</label>
-                            <input type="text" class="form-control" id="user-phone" placeholder="Enter Phone Number"
-                                formControlName="phone">
+                            <input type="text" class="form-control"  placeholder="Enter Phone Number"
+                                formControlName="mobileNo">
                         </div>
                         <div class="mb-2 mt-2">
                             <label for="text" class="form-label">Address:</label>
-                            <input type="text" class="form-control" id="user-address" placeholder="Enter Address"
+                            <input type="text" class="form-control"  placeholder="Enter Address"
                                 formControlName="address">
                         </div>
+                        <div class="mb-2 mt-2">
+                            <label for="pwd" class="form-label">Password:</label>
+                            <input type="password" class="form-control"  placeholder="Enter Password"
+                                formControlName="password">
+                        </div>
+    
+                    <div class="mb-2 mt-2">
+                        <div class="mb-3">
+                            <label for="pwd" class="form-label">Confirm Password:</label>
+                            <input type="password" class="form-control"  placeholder="Enter Confirm Password"
+                                formControlName="confirmpassword">
+                        </div>
+                    </div>
+                        
                         <div  class="mb-2 mt-2">
                             <button type="submit" [disabled]="!registerForm.valid" (click)="postData()" class="btn btn-outline-primary">Submit</button> &nbsp;
                             <button type="submit" (click)="resetData()"class="btn btn-outline-secondary">Reset</button>&nbsp;
@@ -83,12 +104,12 @@
                     <div class="mb-2 mt-2">
                         <label for="text" class="form-label">First Name:</label>
                         <input  type="text"  class="form-control" id="first-name" placeholder="Enter First Name"
-                           formControlName ="firstname">
+                           formControlName ="fisrtName">
                     </div>
                     <div class="mb-2 mt-2">
                         <label for="text" class="form-label">Last Name:</label>
                         <input type="text" class="form-control" id="last-name" placeholder="Enter Last Name"
-                            formControlName="lastname">
+                            formControlName="lastName">
                     </div>
                     <div class="mb-2 mt-2">
                         <label for="email" class="form-label">Email:</label>
@@ -96,13 +117,18 @@
                     </div>
                     <div class="mb-2 mt-2">
                         <label for="text" class="form-label">Phone Number:</label>
-                        <input type="text" class="form-control" id="user-phone" placeholder="Enter Phone Number"
-                            formControlName="phone">
+                        <input type="number" class="form-control" id="user-phone" placeholder="Enter Phone Number"
+                            formControlName="mobileNo">
                     </div>
                     <div class="mb-2 mt-2">
                         <label for="text" class="form-label">Address:</label>
                         <input type="text" class="form-control" id="user-address" placeholder="Enter Address"
                             formControlName="address">
+                    </div>
+                    <div class="mb-2 mt-2">
+                        <label for="pwd" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter Password"
+                            formControlName="password">
                     </div>
                 </form>
             </div>

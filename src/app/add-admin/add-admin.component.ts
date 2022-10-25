@@ -15,15 +15,22 @@ export class AddAdminComponent implements OnInit {
   adminDetail: any
   respdata: any;
   success!: string;
-
-  constructor( private RF: FormBuilder, private route: Router, private _adminService: AdminService) {
+  errorMsg!: string
+  data:any
+  searchbar: FormGroup
+  constructor( private RF: FormBuilder, private routes: Router, private _adminService: AdminService) {
 
     this.adminForm = RF.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.minLength(3)]],
+      mobileNo: ['', [Validators.required, Validators.minLength(3)]],
       address: ['', [Validators.required, Validators.minLength(3)]],
       password: ['',[Validators.required, Validators.minLength(6)]],
+      roles: ['']
+    });
+
+    this.searchbar = RF.group({
+      email: ['', [Validators.required, Validators.email]],
     });
 
    }
@@ -38,14 +45,35 @@ export class AddAdminComponent implements OnInit {
   }
 
   postData(): void {
-    // console.log(this.registerForm.value)
+    console.log(this.adminForm.value)
      this._adminService.createAdmin(this.adminForm.value).subscribe(item => {
-       this.respdata = item;
-       this.success = 'User Registered Successfully'
-       this.getAllData()
+     console.log( item)
+       this.success = 'Admin Registered Successfully'
+       this.reloadCurrentRoute()
      })
-    }
 
+    }
+    reloadCurrentRoute() {
+      const currentUrl = this.routes.url;
+      this.routes.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+          this.routes.navigate([currentUrl]);
+      });
+  }
+
+  search()
+  {
+    this._adminService.getSingleuser(this.searchbar.get('email')?.value).subscribe(item =>
+      {
+        this.data = item
+        console.log(this.data)
+        this.searchbar.reset()
+      }, (error)=>
+      {
+        this.errorMsg = 'User Does Not Exist'
+        //this.errorMsg = false
+      })
+
+  }
     resetData() {
       this.adminForm.reset()
     }

@@ -11,7 +11,7 @@
 
         </div>
         <div class="activity black-border">
-            <div class="row mt-5" *ngIf="firstHalf.length == 0 && secondHalf.length == 0">
+            <div class="row mt-5" *ngIf="data == undefined">
 
                 <div class="col text-enter">
                     <span class="text-secondary fs-2 fw-bold fst-italic">There are no activity is added</span>
@@ -21,49 +21,30 @@
 
             <div class="container-fluid ">    
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="card mt-2 shadow-sm p-3 mb-5 bg-white rounded border-light text-center" *ngFor="let act of firstHalf; let acti = index">
+                  <div class="col-md-4" *ngFor="let act of data; let acti = index">
+                    <div class="card mt-2 shadow-sm p-3 mb-5 bg-white rounded text-center border" [ngClass]="{'border-danger' : act.priorty == 'URGENT',
+                    'border-success' : act.priorty == 'NORMAL',
+                    'border-warning' : act.priorty == 'MODERATE'}" >
                       <div class="card-body">
                         <h5 class="card-title">Activity Discription :</h5>
-                        <p class="card-text">{{act.activitydiscription | titlecase}}</p>
+                        <p class="card-text">{{act.description}}</p>
                         <h5 class="card-title">Activity Time :</h5>
-                        <p class="card-text">{{act.activitytime}}</p>
+                        <p class="card-text">{{act.time}}</p>
                         <h5  class="card-title">Activity Priority :</h5>
-                        <p class="card-text text-danger fw-bold" [class]="success">{{act.activitypriority | uppercase}}</p>
+                        <p class="card-text fw-bold" [ngClass]="{'text-danger' : act.priorty == 'URGENT',
+                        'text-success' : act.priorty == 'NORMAL',
+                        'text-warning' : act.priorty == 'MODERATE'}">{{act.priorty}}</p>
                         <h5 class="card-title">Activity Assign By :</h5>
-                        <p class="card-text ">{{act.assignbyemail}}</p>
+                        <p class="card-text ">{{act.assignBy}}</p>
                         <h5 class="card-title">Activity Assign To :</h5>
-                        <p class="card-text">{{act.assigntoemail}}</p>
-                        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editAct(act)">Edit</button>
-                        <button class="btn btn-outline-danger mx-2" (click)="delActivity(act.id)">Delete</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="card mt-2 shadow-sm p-3 mb-5 bg-white rounded border-light text-center" *ngFor="let act of secondHalf; let acti = index">
-                      <div class="card-body">
-                        <h5 class="card-title">Activity Discription :</h5>
-                        <p class="card-text">{{act.activitydiscription}}</p>
-                        <h5 class="card-title">Activity Time :</h5>
-                        <p class="card-text">{{act.activitytime}}</p>
-                        <h5  class="card-title">Activity Priority :</h5>
-                        <p class="card-text text-danger fw-bold" [ngClass]="{'badge-danger' : 'act.activitypriority == urgent',
-                        'badge-success' : 'act.activitypriority == normal',
-                        'badge-warning' : 'act.activitypriority == moderate'}">{{act.activitypriority | uppercase}}</p>
-                        <h5 class="card-title">Activity Assign By :</h5>
-                        <p class="card-text ">{{act.assignbyemail}}</p>
-                        <h5 class="card-title">Activity Assign To :</h5>
-                        <p class="card-text">{{act.assigntoemail}}</p>
+                        <p class="card-text">{{act.assignTo}}</p>
                         <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editAct(act)">Edit</button>
                         <button  class="btn btn-outline-danger mx-2" (click)="delActivity(act.id)">Delete</button>
                       </div>
                     </div>
                   </div>
               </div>
-            </div>
-
-
-     
+            </div>     
     </main>
 
 </div>
@@ -81,12 +62,12 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Activity Discription</label>
-                        <textarea class="form-control" formControlName = "activitydiscription" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" formControlName = "description" id="exampleFormControlTextarea1" rows="3"></textarea>
                       </div>
                       <div class="row">
                         <div class="col">
                             <label class="form-label">Activity Time</label>
-                             <input type="time" formControlName = "activitytime" class="form-control" id="appt" name="appt">
+                             <input type="time" formControlName = "time" class="form-control" id="appt" name="appt">
                         </div>
                       </div>
                       <div class="row">
@@ -96,15 +77,15 @@
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" formControlName = "activitypriority" type="radio"  id="inlineRadio1" value="normal">
+                                <input class="form-check-input" formControlName = "priorty" type="radio"  id="inlineRadio1" value="NORMAL">
                                 <label class="form-check-label" for="inlineRadio1">Normal</label>
                               </div>
                               <div class="form-check form-check-inline">
-                                <input class="form-check-input" formControlName = "activitypriority" type="radio"  id="inlineRadio2" value="moderate">
+                                <input class="form-check-input" formControlName = "priorty" type="radio"  id="inlineRadio2" value="MODERATE">
                                 <label class="form-check-label" for="inlineRadio2">Moderate</label>
                               </div>
                               <div class="form-check form-check-inline">
-                                <input class="form-check-input" formControlName = "activitypriority" type="radio" id="inlineRadio3" value="urgent">
+                                <input class="form-check-input" formControlName = "priorty" type="radio" id="inlineRadio3" value="URGENT">
                                 <label class="form-check-label" for="inlineRadio3">Urgent</label>
                               </div>
 
@@ -114,7 +95,7 @@
                         <div class="col">
                             <div class="mt-2">
                                 <label for="exampleFormControlInput1" class="form-label">Assign By Email address</label>
-                                <input type="email" class="form-control" formControlName = "assignbyemail" id="exampleFormControlInput1" placeholder="Enter the Email">
+                                <input type="email" class="form-control" formControlName = "assignBy" id="exampleFormControlInput1" placeholder="Enter the Email">
                               </div>
                         </div>
                       </div>
@@ -122,7 +103,7 @@
                         <div class="col">
                             <div class="mb-3 mt-2">
                                 <label for="exampleFormControlInput1" class="form-label">Assign To Email address</label>
-                                <input type="email" class="form-control" formControlName = "assigntoemail" id="exampleFormControlInput1" placeholder="Enter the Email">
+                                <input type="email" class="form-control" formControlName = "assignTo" id="exampleFormControlInput1" placeholder="Enter the Email">
                               </div>
                         </div>
                       </div>

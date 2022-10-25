@@ -8,7 +8,7 @@ import { UserService } from '../service/user.service';
 })
 export class UserDashboardComponent implements OnInit {
 
-   data : any = ''
+   data : any
 
   constructor(public _userService: UserService) 
   { 
@@ -19,7 +19,7 @@ export class UserDashboardComponent implements OnInit {
     this._userService.getProfile().subscribe((res)=>
     {
       {
-        this.data = res.user // get Data form user
+        this.data = res
         //console.log(this.data)
       }
       

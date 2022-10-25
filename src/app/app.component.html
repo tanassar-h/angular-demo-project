@@ -11,13 +11,13 @@
         <a class="nav-link" routerLinkActive="active"  routerLink="userDashboard" *ngIf="dashboardUser">User Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active"  routerLink="activity">Activity List</a>
+        <a class="nav-link" routerLinkActive="active"  routerLink="activity"  [queryParams]="{email: email.id}">Activity List</a>
       </li>
       <li class="nav-item">
         <a class="nav-link"  routerLinkActive="active"  routerLink='user'>User</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active"  routerLink="createAdmin" *ngIf="dashboardAdmin">Create Admin</a>
+        <a class="nav-link" routerLinkActive="active"  routerLink="createAdmin" *ngIf="dashboardAdmin">Admin Control Panal</a>
       </li>
       
     </ul>

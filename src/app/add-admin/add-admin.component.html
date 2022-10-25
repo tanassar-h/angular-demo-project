@@ -1,35 +1,56 @@
 <div class="container-fluid">
     <div class="row justify-content-md-between d-sm-flex">
-        <div class="col-lg-7">
-                        <table class="table table-responsive table-striped table-hover shadow p-3 mb-5 bg-body rounded border border-light">
-                            <thead>
-                              <tr >
-                                <th scope="col">{{displayColumns[0]}}</th>
-                                <th scope="col">{{displayColumns[1]}}</th>
-                                <th scope="col">{{displayColumns[2]}}</th>
-                                <th scope="col">{{displayColumns[3]}}</th>
-                                <th scope="col">{{displayColumns[4]}}</th>
-                                <th scope="col">{{displayColumns[5]}}</th>
-                       
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <tbody>
-                                    <tr *ngFor="let admin of adminDetail">
-                                      <td>{{admin.name}}</td>
-                                      <td>{{admin.email}}</td>
-                                      <td>{{admin.phone}}</td>
-                                      <td>{{admin.address}}</td>
-                                      <td>{{admin.password}}</td>
-                                    </tr>
-                                  </tbody>
-                          </table>
+        <div class="col-lg-7"> 
+            <h3 class="text-center">Enter User Email To Find</h3>
+            <form class='navbar-form' [formGroup]="searchbar">
+                <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{errorMsg}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class='form-group'>
+                  <input class='form-control rounded-0'  type='text' name='search' placeholder='Enter Email of User' formControlName = 'email'>
+      
+                </div>
+                <button type='submit' [disabled]="!searchbar.valid" (click)="search()" class='btn btn-outline-secondary rounded-0 mt-1'>Search</button>
+              </form>
+                <div class="card mb-3 mx-auto mt-2 shadow-lg  mb-5 bg-white rounded row border-light" style="max-width: 540px;">
+                    <div class="card-header">
+                            User Detail's
+                      </div>
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">First Name :</h5>
+                          <p class="card-text">{{data.fisrtName}}</p>
+                          <h5 class="card-title">Last Name :</h5>
+                          <p class="card-text">{{data.lastName}}</p>
+                          <h5 class="card-title">Email :</h5>
+                          <p class="card-text">{{data.email}}</p>
+                          <h5 class="card-title">Phone Number :</h5>
+                          <p class="card-text">{{data.mobileNo}}</p>
+                          <h5 class="card-title">Address :</h5>
+                          <p class="card-text">{{data.address}}</p>
+                      </div>
+                    </div>
+                  </div>
+
+        </div>       
         </div>
             <div class="col-lg-5">
                 <div class="card  shadow p-3 mb-5 bg-body rounded border border-light  justify-content-end">
                     
                     <div class="card-body">
                         <h5 class="card-title fw-bold fs-5">Add New Admin:</h5>
+                        <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{errorMsg}}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{success}}</strong>
+                        </div>
                         <form action="" [formGroup]="adminForm">
                         <div class="mb-2 mt-2">
                             <label for="text" class="form-label">Name:</label>
@@ -43,7 +64,7 @@
                         <div class="mb-2 mt-2">
                             <label for="text" class="form-label">Phone Number:</label>
                             <input type="text" class="form-control" id="user-phone" placeholder="Enter Phone Number"
-                                formControlName="phone">
+                                formControlName="mobileNo">
                         </div>
                         <div class="mb-2 mt-2">
                             <label for="text" class="form-label">Address:</label>

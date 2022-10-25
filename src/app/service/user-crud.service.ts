@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class UserCrudService {
 
-  apiUrl = 'http://localhost:3000/profile'
+  apiUrl = 'http://haalim-001-site1.dtempurl.com/api/Admin/GetAllUsers'
   
-  createUrl = "http://localhost:3000/profile"   // create User
+  createUrl = ""   // create User
   constructor(private http:HttpClient) { }
 
  
@@ -26,19 +26,29 @@ export class UserCrudService {
    
    createUser(data:any):Observable<any>
    {
-     return this.http.post(`${this.createUrl}` ,data)
+    console.log(data)
+     return this.http.post(`http://haalim-001-site1.dtempurl.com/api/Admin/AddUser` ,data)
      
    }
  
    deleteUser(id:any):Observable<any>
    {
      let ids = id
-     return this.http.delete(`${this.createUrl}/${ids}`)
+     return this.http.delete(`http://haalim-001-site1.dtempurl.com/api/Admin/DeleteUser/${ids}`)
    }
  
 
    updateUser (data:any , id:any):Observable<any>{
+    console.log(data)
+    console.log(id)
      let ids = id
-     return this.http.put(`${this.createUrl}/${ids}`, data)
+     return this.http.put(`http://haalim-001-site1.dtempurl.com/api/User/UpdateUserDetails/${ids}`,data)
+   }
+
+   updateuserbyAadmin(data:any , id:any):Observable<any>
+   {
+  	
+    let ids = id
+    return this.http.put(`http://haalim-001-site1.dtempurl.com/api/Admin/UpdateUser/${ids}`,data)
    }
 }

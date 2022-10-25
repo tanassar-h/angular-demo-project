@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AdminService {
 
-  getallAdminurl = 'http://haalim-001-site1.dtempurl.com/api/Admin/GetAllUsers';
+  getallAdminurl = '';
   getsingleDataurl = '	http://haalim-001-site1.dtempurl.com/api/Admin/AddUser';
   adminApi = ''
   requestHeader  = new HttpHeaders(
@@ -21,7 +21,7 @@ export class AdminService {
 
   getAllAdmin():Observable<any>
   {
-    return this.http.get(`${this.getallAdminurl}`)
+    return this.http.get(``)
   }
   public getProfile(): Observable<any>
   {
@@ -30,11 +30,19 @@ export class AdminService {
   }
   createAdmin(data:any):Observable<any>
   {
-    return this.http.post(`${this.getAllAdmin}` ,data)
+    console.log('serv' ,data)
+    return this.http.post('http://haalim-001-site1.dtempurl.com/api/Admin/AddAdmin' , data)
    
   }
   registration(data:any):Observable<any>
   {
     return this.http.post(`${this.adminApi}`, data)
+  }
+
+  getSingleuser(email:any):Observable<any>
+  {
+    let user_email = email
+    console.log(user_email)
+    return this.http.get(`http://haalim-001-site1.dtempurl.com/api/Admin/GetUser/${user_email}`)
   }
 }
