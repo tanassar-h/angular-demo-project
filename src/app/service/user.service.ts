@@ -17,7 +17,6 @@ export class UserService {
       'Authorization':'Bearer ' + this._userAuthService.getToken()
     }
   )
-  of: any;
   constructor(private http: HttpClient, private _userAuthService: UserAuthService) { }
 
   public proceedLogin(loginData: any): Observable<any> // Jwt Token
@@ -52,7 +51,7 @@ export class UserService {
   public registration(data:any)
   {
     console.log('service' , data)
-    return this.http.post(`${this.signupApi}`, data)
+    return this.http.post(`http://haalim-001-site1.dtempurl.com/api/User/SignUp`,data)
 
   }
   

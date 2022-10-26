@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
           const role = tokenInfo.role;
           if(role === 'admin')
           {
-            this.router.navigate(['adminDashboard']);
+            this.router.navigate(['activity']);
       
           }
           else

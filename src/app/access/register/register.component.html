@@ -11,7 +11,7 @@
             </div>
             <h5 class="card-title">Signup Form</h5>
             <h6 class="card-subtitle mb-2 text-muted">Please fill all the fields</h6>
-            <form action="" [formGroup]="registerForm">
+            <form  [formGroup]="registerForm">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3 mt-3">
@@ -31,8 +31,8 @@
                                 formControlName="lastName">
                         </div>
                         <div class="mb-3">
-                            <label for="number" class="form-label">Phone Number:</label>
-                            <input type="number" class="form-control" id="user-phone" placeholder="Enter Phone Number"
+                            <label for="string" class="form-label">Phone Number:</label>
+                            <input type="string" class="form-control" id="user-phone" placeholder="Enter Phone Number"
                                 formControlName="mobileNo">
                         </div>
                     </div>
@@ -58,9 +58,9 @@
                     </div>
                     
                     <div class="col-sm-6 my-3">
-                        <button type="submit" [disabled]="!registerForm.valid" (click)="postData()" class="btn btn-primary">Submit</button> &nbsp;
-                        <button type="submit" (click)="resetData()"class="btn btn-outline-secondary">Reset</button>&nbsp;
-                        <button type="submit" (click)="close()"class="btn btn-outline-danger">Close</button>
+                        <button type="submit" [disabled]="!registerForm.valid" (click)="postData()" class="btn btn-outline-primary mt-1">Submit</button> &nbsp;
+                        <button type="submit" (click)="resetData()"class="btn btn-outline-secondary mt-1">Reset</button>&nbsp;
+                        <button type="submit" (click)="close()"class="btn btn-outline-danger mt-1">Close</button>
                     </div>
                 </div>
             </form>

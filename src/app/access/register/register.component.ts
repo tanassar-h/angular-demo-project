@@ -39,12 +39,16 @@ export class RegisterComponent implements OnInit {
     {
       let regData = this.registerForm.value;
       delete regData.confirmpassword;
-      console.log(regData)
-      this._userService.registration(regData).subscribe()
-      this.success = 'User Registered Successfully'
-      setTimeout(() => {
-        this.close()
-      }, 1000);
+      //console.log(regData)
+      this._userService.registration(regData).subscribe(()=>
+        {
+          this.success = 'User Registered Successfully'
+        }
+      ,(error)=>
+      {
+        alert(error)
+      })
+
     } else 
     {
       this.errorMsg = 'Password Not Match';
