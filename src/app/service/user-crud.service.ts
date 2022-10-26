@@ -39,8 +39,8 @@ export class UserCrudService {
  
 
    updateUser (data:any , id:any):Observable<any>{
-    console.log(data)
-    console.log(id)
+    //console.log(data)
+    //console.log(id)
      let ids = id
      return this.http.put(`http://haalim-001-site1.dtempurl.com/api/User/UpdateUserDetails/${ids}`,data)
    }
@@ -50,5 +50,6 @@ export class UserCrudService {
   	
     let ids = id
     return this.http.put(`http://haalim-001-site1.dtempurl.com/api/Admin/UpdateUser/${ids}`,data)
+    
    }
 }

@@ -102,8 +102,6 @@ export class UserComponent implements OnInit  {
   deleteID(email: any) {
     this._serviceCrud.deleteUser(email).subscribe((res) => {
       this.success = res.message
-      this.getAllData()
-      this.reloadCurrentRoute()
 
       // instant load data
      // this.api.getAllUser().subscribe((res) => {
@@ -112,6 +110,11 @@ export class UserComponent implements OnInit  {
      // })
      
    })
+   setTimeout(() => {
+    this.reloadCurrentRoute()
+    this.getAllData()
+
+   }, 1000);
   }
 
    updateID(data:any)
@@ -134,11 +137,16 @@ export class UserComponent implements OnInit  {
       {
         //console.log(this.getparamid)
         this._serviceCrud.updateUser(this.editForm.value , this.getparamid).subscribe()
-        this.getAllData()
-        this.reloadCurrentRoute()
+       // this.getAllData()
+        //this.reloadCurrentRoute()
+     
         
    
       }
+      setTimeout(() => {
+        this.reloadCurrentRoute()
+    
+       }, 1000);
     }
     else
     {
@@ -146,9 +154,9 @@ export class UserComponent implements OnInit  {
       {
         //console.log(this.getparamid)
         this._serviceCrud.updateuserbyAadmin(this.editForm.value , this.getparamid).subscribe()
-        this.getAllData()
-        this.reloadCurrentRoute()
-   
+       this.getAllData()
+       this.reloadCurrentRoute()
+ 
       }
     }
 

@@ -26,6 +26,8 @@
                     'border-success' : act.priorty == 'NORMAL',
                     'border-warning' : act.priorty == 'MODERATE'}" >
                       <div class="card-body">
+                        <h5 class="card-title">Activity ID :</h5>
+                        <p class="card-text fw-bold">{{act.id}}</p>
                         <h5 class="card-title">Activity Discription :</h5>
                         <p class="card-text">{{act.description}}</p>
                         <h5 class="card-title">Activity Time :</h5>
@@ -112,7 +114,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="!activityForm.valid" (click)="postData()">Insert</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="!activityForm.valid" (click)="postData()">Save</button>
           <button type="button" class="btn btn-warning" (click)="reset()">Clear</button>
         </div>
       </div>

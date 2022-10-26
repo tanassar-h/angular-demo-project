@@ -25,11 +25,12 @@ export class ActivityService {
   deleteActivity (id:any):Observable<any>
   {
     let ids = id
-    return this.http.delete(`${this.baseUrl}/${ids}`)
+    console.log(ids)
+    return this.http.delete(`http://haalim-001-site1.dtempurl.com/api/Admin/ DeleteActivity/${ids}`)
   }
 
   editActivity(data:any , id:any):Observable<any>{
     let ids = id
-    return this.http.put(`${this.baseUrl}/${ids}`, data)
+    return this.http.put(`http://haalim-001-site1.dtempurl.com/api/Admin/UpdateActivity/${ids}`, data)
   }
 }

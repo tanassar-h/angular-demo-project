@@ -28,7 +28,7 @@ export class ActivityComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(3)]],
       time: ['', [Validators.required]],
       priorty: ['', [Validators.required , Validators.minLength(3)]],
-      assignBy: ['', [ Validators.email]],
+      assignBy: [this._authService.getEmail(), [ Validators.email]],
       assignTo: ['', [Validators.required, Validators.email]],
 
     });
@@ -42,6 +42,10 @@ export class ActivityComponent implements OnInit {
       this.reset();
       this.success = 'Activity Is Assigned';
       this.getData()
+    },(error)=>
+    {
+      this.reset();
+      console.log(error)
     })
 
   }
@@ -65,10 +69,17 @@ export class ActivityComponent implements OnInit {
     this._activityService.deleteActivity(id).subscribe(res=>
       {
         this.success = res 
+        console.log('ok')
         this.getData() 
 
       }
     )
+   setTimeout(() => {
+    this.reloadCurrentRoute()
+    this.getData() 
+
+   }, 1000);
+
  }
 
   editAct(data:any)
@@ -80,7 +91,7 @@ export class ActivityComponent implements OnInit {
      this.activityForm.controls['assignBy'].setValue(data.assignBy);
      this.activityForm.controls['assignTo'].setValue(data.assignTo);
      this.getparamid = (data.id)
-    // this.delActivity(this.getparamid)
+    this.delActivity(this.getparamid)
  
   }
 

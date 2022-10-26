@@ -1,0 +1,125 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div *ngIf="success" class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                <strong>{{success}}</strong>
+            </div>
+                <main>
+                    <div class="toolbar">
+            
+                        <div class="add-activity mt-3">
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Activity</button>
+                        </div>
+            
+                    </div> 
+                </main>
+            
+            </div>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Activity Assignment</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="useractivityForm">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Activity Discription</label>
+                                    <textarea class="form-control" formControlName = "description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Activity Time</label>
+                                         <input type="time" formControlName = "time" class="form-control" id="appt" name="appt">
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                        <div>
+                                            <label class="form-label mt-2">Activity Priority</label>
+                                        </div>
+            
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" formControlName = "priorty" type="radio"   value="NORMAL">
+                                            <label class="form-check-label" for="inlineRadio1">Normal</label>
+                                          </div>
+                                          <div class="form-check form-check-inline">
+                                            <input class="form-check-input" formControlName = "priorty" type="radio"   value="MODERATE">
+                                            <label class="form-check-label" for="inlineRadio2">Moderate</label>
+                                          </div>
+                                          <div class="form-check form-check-inline">
+                                            <input class="form-check-input" formControlName = "priorty" type="radio"  value="URGENT">
+                                            <label class="form-check-label" for="inlineRadio3">Urgent</label>
+                                          </div>
+            
+                                  </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                        <div class="mt-2">
+                                            <label for="exampleFormControlInput1" class="form-label">Assign By Email address</label>
+                                            <input type="email" class="form-control" formControlName = "assignBy" id="exampleFormControlInput1" placeholder="Enter the Email">
+                                          </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3 mt-2">
+                                            <label for="exampleFormControlInput1" class="form-label">Assign To Email address</label>
+                                            <input type="email" class="form-control" formControlName = "assignTo" id="exampleFormControlInput1" placeholder="Enter the Email">
+                                          </div>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="!useractivityForm.valid" (click)="postData()">Insert</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="!useractivityForm.valid" (click)="editActivity()">Save</button>
+                      <button type="button" class="btn btn-warning" (click)="reset()">Clear</button>
+                    </div>
+                  </div>
+                </div>
+        </div>
+        <div class="col-md-6">
+            <form class='navbar-form mt-3' [formGroup]="searchbar">
+                <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Activity Does Not Exist</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class='form-group'>
+                  <input class='form-control rounded' #id type='text' name='search' placeholder='Enter ID to Find Activity' formControlName = 'id'>
+                </div>
+                <button type='submit'  (click)="search(id.value)" class='btn btn-outline-secondary mt-1'>Search</button>
+              </form>
+              <div class="card mt-2 shadow-sm p-3 mb-5 bg-white rounded text-center border" [hidden]="active" [ngClass]="{'border-danger' : act.priorty == 'URGENT',
+                      'border-success' : act.priorty == 'NORMAL',
+                      'border-warning' : act.priorty == 'MODERATE'}" >
+                        <div class="card-body">
+                          <h5 class="card-title">Activity ID :</h5>
+                          <p class="card-text fw-bold">{{act.id}}</p>
+                          <h5 class="card-title">Activity Discription :</h5>
+                          <p class="card-text">{{act.description}}</p>
+                          <h5 class="card-title">Activity Time :</h5>
+                          <p class="card-text">{{act.time}}</p>
+                          <h5  class="card-title">Activity Priority :</h5>
+                          <p class="card-text fw-bold" [ngClass]="{'text-danger' : act.priorty == 'URGENT',
+                          'text-success' : act.priorty == 'NORMAL',
+                          'text-warning' : act.priorty == 'MODERATE'}">{{act.priorty}}</p>
+                          <h5 class="card-title">Activity Assign By :</h5>
+                          <p class="card-text ">{{act.assignBy}}</p>
+                          <h5 class="card-title">Activity Assign To :</h5>
+                          <p class="card-text">{{act.assignTo}}</p>
+                          <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editAct(act)">Edit</button>
+                          <button  class="btn btn-outline-danger mx-2" (click)="delActivity(act.id)">Delete</button>
+                        </div>
+                      </div>
+        </div>
+    </div>
+   
+</div>

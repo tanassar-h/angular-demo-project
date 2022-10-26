@@ -5,13 +5,13 @@
           <a class="navbar-brand" class="nav-link fw-bold" >Demo Project</a>
         </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active"  routerLink="adminDashboard"  *ngIf="dashboardAdmin">Admin Dashboard</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" routerLinkActive="active"  routerLink="userDashboard" *ngIf="dashboardUser">User Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active"  routerLink="activity"  [queryParams]="{email: email.id}">Activity List</a>
+        <a class="nav-link" routerLinkActive="active"  routerLink="activity"  *ngIf="dashboardAdmin" >Activity List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active"  routerLink="userActivity"   *ngIf="dashboardUser">User Activity</a>
       </li>
       <li class="nav-item">
         <a class="nav-link"  routerLinkActive="active"  routerLink='user'>User</a>

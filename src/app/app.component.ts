@@ -15,7 +15,7 @@ export class AppComponent implements DoCheck {
   menuVisible: boolean = true;
   dashboardAdmin: boolean = false;
   dashboardUser: boolean = false;
-  email = {'id' : this._userAuthService.getEmail()}
+  //email = {'id' : this._userAuthService.getEmail()}
   ngDoCheck(): void {
     const currentRoute = this.route.url;
     if(currentRoute == '/login' || currentRoute == '/access/register')

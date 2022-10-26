@@ -15,7 +15,7 @@ export class AddAdminComponent implements OnInit {
   adminDetail: any
   respdata: any;
   success!: string;
-  errorMsg!: string
+  errorMsg: any
   data:any
   searchbar: FormGroup
   constructor( private RF: FormBuilder, private routes: Router, private _adminService: AdminService) {
@@ -67,9 +67,10 @@ export class AddAdminComponent implements OnInit {
         this.data = item
         console.log(this.data)
         this.searchbar.reset()
+        this.errorMsg = false
       }, (error)=>
       {
-        this.errorMsg = 'User Does Not Exist'
+        this.errorMsg = true
         //this.errorMsg = false
       })
 

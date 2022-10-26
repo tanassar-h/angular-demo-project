@@ -15,8 +15,10 @@ import { ActivityComponent } from './activity/activity.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { UserService } from './service/user.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
+import { HomeComponent } from './home/home.component';
+import { UserActivityComponent } from './user-activity/user-activity.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AuthGuard } from './guard/auth.guard';
     ActivityComponent,
     AddAdminComponent,
     UserDashboardComponent,
-    AdminDashboardComponent
+    HomeComponent,
+    UserActivityComponent,
+
   ],
   imports: [
     BrowserModule,
