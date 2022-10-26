@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
         }
       ,(error)=>
       {
-        alert(error)
+        this.errorMsg = error.error
       })
 
     } else 
