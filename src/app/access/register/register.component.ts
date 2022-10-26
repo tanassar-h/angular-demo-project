@@ -43,6 +43,9 @@ export class RegisterComponent implements OnInit {
       this._userService.registration(regData).subscribe(()=>
         {
           this.success = 'User Registered Successfully'
+          setTimeout(() => {
+            this.route.navigate(['login'])
+          }, 1000);
         }
       ,(error)=>
       {
