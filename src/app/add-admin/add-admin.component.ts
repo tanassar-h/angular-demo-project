@@ -18,6 +18,7 @@ export class AddAdminComponent implements OnInit {
   errorMsg: any
   data:any
   hidden:Boolean = true
+  hiddenif:Boolean = false
   searchbar: FormGroup
   constructor( private RF: FormBuilder, private routes: Router, private _adminService: AdminService) {
 
@@ -72,8 +73,9 @@ export class AddAdminComponent implements OnInit {
         this.hidden = false
       }, (error)=>
       {
-        this.errorMsg = true
-        this.hidden = false
+       
+       this.hidden = true
+       this.hiddenif = true;
         //this.errorMsg = false
       })
 

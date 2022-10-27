@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   respdata: any
   errorMsg: any
   flag:boolean = false;
+
   
 
   constructor(
@@ -38,7 +39,10 @@ export class LoginComponent implements OnInit {
       //console.log(this.loginForm)
       this._userService.proceedLogin(this.loginForm.value).subscribe(
         (response:any) => {
+     
+          this.errorMsg = response
           let tokenInfo:any = jwt_decode(response);
+          
           if(response.status == 'failed')
           {
             this.errorMsg = response.message;
@@ -58,9 +62,10 @@ export class LoginComponent implements OnInit {
           
             this.router.navigate(['userDashboard'])
           }
-      }, (_error)=>
+       
+      }, (_error:any)=>
       {
-        alert('Login Failed Server Error Try Again')
+    
       })
     }
     else {

@@ -3,7 +3,7 @@
         <div class="col-lg-7"> 
             <h3 class="text-center">Enter User Email To Find</h3>
             <form class='navbar-form' [formGroup]="searchbar">
-                <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div *ngIf="hiddenif" class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>User Does Not Exist</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
