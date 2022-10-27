@@ -76,6 +76,7 @@ export class AddAdminComponent implements OnInit {
        
        this.hidden = true
        this.hiddenif = true;
+       this.searchbar.reset()
         //this.errorMsg = false
       })
 
