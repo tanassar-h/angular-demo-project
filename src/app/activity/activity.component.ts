@@ -16,15 +16,16 @@ export class ActivityComponent implements OnInit {
   activity: any
   success: any
   data: any;
-  half: any
-  dataHalf : any
-  firstHalf: any;
-  secondHalf: any;
+  flagA: Boolean = true
+  flagB: Boolean = false
   getparamid: any;
   element: any
   isAssign: Boolean = true
+  del: any
+  
   constructor(private RF: FormBuilder, private _activityService: ActivityService , private routes : Router , private _authService : UserAuthService ) {
     this.activityForm = this.RF.group({
+      id: [''],
       description: ['', [Validators.required, Validators.minLength(3)]],
       time: ['', [Validators.required]],
       priorty: ['', [Validators.required , Validators.minLength(3)]],
@@ -37,6 +38,8 @@ export class ActivityComponent implements OnInit {
   }
 
   postData(): void {
+
+
 
     this._activityService.postActivity(this.activityForm.value).subscribe(res => {
       this.reset();
@@ -75,6 +78,7 @@ export class ActivityComponent implements OnInit {
       }
     )
    setTimeout(() => {
+    this.del = 'Activity Delete Succesfully'
     this.reloadCurrentRoute()
     this.getData() 
 
@@ -85,13 +89,15 @@ export class ActivityComponent implements OnInit {
   editAct(data:any)
   {
     console.log(data)
+    this.flagA = false
+    this.flagB = true
      this.activityForm.controls['description'].setValue(data.description);
      this.activityForm.controls['time'].setValue(data.time);
      this.activityForm.controls['priorty'].setValue(data. priorty);
      this.activityForm.controls['assignBy'].setValue(data.assignBy);
      this.activityForm.controls['assignTo'].setValue(data.assignTo);
      this.getparamid = (data.id)
-    this.delActivity(this.getparamid)
+    //this.delActivity(this.getparamid)
  
   }
 
@@ -102,12 +108,16 @@ export class ActivityComponent implements OnInit {
    if(this.activityForm.valid)
    {
      //console.log(this.getparamid)
-     
+     this.activityForm.patchValue({id: this.getparamid})
      this._activityService.editActivity(this.activityForm.value , this.getparamid).subscribe()
-    
-     this.reloadCurrentRoute()
 
    }
+   setTimeout(() => {
+    this.success = 'Activity Is Edit Successfully';
+    this.reloadCurrentRoute()
+    this.getData() 
+
+   }, 1000);
   }
 
   reloadCurrentRoute() {

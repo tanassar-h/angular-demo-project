@@ -1,7 +1,13 @@
 <div class="container-fluid g-0">
-  <div *ngIf="success" class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+  <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>{{success}}</strong>
-</div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div *ngIf="del" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{del}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
     <main>
         <div class="toolbar">
 
@@ -114,7 +120,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="!activityForm.valid" (click)="postData()">Save</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="!activityForm.valid || flagB" (click)="postData()">Insert</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="!activityForm.valid || flagA" (click)="editActivity()">Save</button>
           <button type="button" class="btn btn-warning" (click)="reset()">Clear</button>
         </div>
       </div>

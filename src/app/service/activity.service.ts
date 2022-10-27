@@ -31,6 +31,6 @@ export class ActivityService {
 
   editActivity(data:any , id:any):Observable<any>{
     let ids = id
-    return this.http.put(`http://haalim-001-site1.dtempurl.com/api/Admin/UpdateActivity/${ids}`, data)
+    return this.http.put(`http://haalim-001-site1.dtempurl.com/api/Admin/UpdateActivity${ids}`, data)
   }
 }
