@@ -13,7 +13,7 @@
                 </div>
                 <button type='submit' [disabled]="!searchbar.valid" (click)="search()" class='btn btn-outline-secondary rounded-0 mt-1'>Search</button>
               </form>
-                <div class="card mb-3 mx-auto mt-2 shadow-lg  mb-5 bg-white rounded row border-light" style="max-width: 540px;">
+                <div class="card mb-3 mx-auto mt-2 shadow-lg  mb-5 bg-white rounded row border-light" [hidden]="hidden" style="max-width: 540px;">
                     <div class="card-header">
                             User Detail's
                       </div>
