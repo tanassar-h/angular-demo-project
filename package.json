@@ -47,5 +47,18 @@
   "engines": {
     "node": "16.17.1",
     "npm": "8.15.0"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.5.",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanassar-h/angular-demo-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tanassar-h/angular-demo-project/issues"
+  },
+  "homepage": "https://github.com/tanassar-h/angular-demo-project#readme"
 }
