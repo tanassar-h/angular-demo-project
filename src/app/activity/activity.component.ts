@@ -40,7 +40,7 @@ export class ActivityComponent implements OnInit {
   postData(): void {
 
 
-
+    this.activityForm.removeControl('id');
     this._activityService.postActivity(this.activityForm.value).subscribe(res => {
       this.reset();
       this.success = 'Activity Is Assigned';
